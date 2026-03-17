@@ -1,0 +1,85 @@
+.mainVstack {
+  display: flex;
+  flex-direction: column;
+ 
+  }
+  
+  .jobInfoHStack {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+   
+  }
+
+  .main {
+    padding: 20;
+  overflow: auto;
+  }
+
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+    background-color: rgba(207, 202, 202, 0.65);
+    color: black;
+    text-align: left;
+    width: 100%;
+  }
+
+  .topItems {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: rgba(63, 60, 60, 0.75);
+    color: white;
+    text-align: left;
+  }
+
+  .status {
+    display: flex;
+    flex-direction: row;
+    padding: 5px
+  }
+
+  .searchBar {
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  .searchBarHStack {
+    display: flex;
+    flex-direction: row;
+    padding: 2px
+  }
+
+  .addButton {
+    background-color: green;
+    border: 1px black solid;
+width:40px;
+margin-bottom: 5px;
+border-radius: 50%; 
+  }
+
+  .deleteButton {
+    font-size: 20px;
+margin-bottom: 5px;
+margin-left: 10px;
+background-color: transparent;
+border: transparent;
+align-self: flex-end;
+  }
+
+  .trashSpacerTopItem {
+    
+    width: 20px;
+    margin:9px;
+margin-bottom: 5px;
+margin-left: 10px;
+background-color: transparent;
+border: transparent;
+align-self: flex-end;
+
+
+  }

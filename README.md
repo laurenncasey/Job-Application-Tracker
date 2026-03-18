@@ -30,7 +30,7 @@ A web application to track your job applications, built with React, TypeScript, 
 
 Clone the repository:
 
-`git clone https://github.com/laurenncasey/job-application-tracker.git`
+`git clone [https://github.com/laurenncasey/job-application-tracker.git](https://github.com/laurenncasey/Job-Application-Tracker.git)`
 `cd job-application-tracker`
 
 Install dependencies:

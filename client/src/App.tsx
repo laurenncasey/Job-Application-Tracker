@@ -1,29 +1,65 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import ModalForm from "./addAppModal";
 
 function App() {
   const [applications, setApplications] = useState([]);
-  
+  const [searchBarText, setSearchBarText] = useState("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  // TODO: EDIT FUNCTION ... maybe a '...' next to the job or something... 
+
   const fetchApps = async () => {
-    const res = await fetch("http://localhost:3000/applications");
+    let url = "http://localhost:3000/applications";
+
+    const trimmed = searchBarText?.trim();
+    if (trimmed) {
+      url += `?search=${encodeURIComponent(searchBarText)}`
+    }else{
+      url = "http://localhost:3000/applications"
+    }
+    const res = await fetch(url);
     const data = await res.json();
     setApplications(data);
   };
 
+  const deleteApplication = async (id: string) => {
+    fetch(`http://localhost:3000/applications/${id}`, {
+  method: "DELETE",
+})
+  .then(response => {
+    if (response.ok) {
+      console.log("Application deleted successfully");
+
+    } else {
+      console.log("Failed to delete");
+    }
+  })
+  .catch(error => console.error(error));
+  }
+
+  const createApplication = async (company: string, role: string, status: string, location: string, salary: number) => {
+    const res = await fetch("http://localhost:3000/applications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        company: company,
+        role: role,
+        status: status,
+        location: location, 
+        salary: salary, 
+      }),
+    });
+  
+    const data = await res.json();
+    setApplications(data);
+  };
+
+
   useEffect(() => {
     fetchApps();
-  }, []);
-
-  const addJob = async () => {
-    console.log("adding");
-  }
-  const searchJobs = async (e: string) => {
-    console.log("searching");
-  }
-
-  const deleteJob = async (e: app) => {
-    console.log("deeleting");
-  }
+  }, [searchBarText, applications]);
 
   return (
     <div className="main">
@@ -33,10 +69,11 @@ function App() {
         <input className="searchBar"
   type="text"
   placeholder="🔍 Search"
-  onChange={(e) => searchJobs(e.target.value)}
+  onChange={(e) => {setSearchBarText(e.target.value); fetchApps();}}
 />
 
-<button onClick={addJob} className="addButton">➕</button>
+<button onClick={() => setModalOpen(true)} className="addButton">➕</button>
+<ModalForm isOpen={modalOpen} onClose={() => setModalOpen(false)} addApplication={createApplication}/>
         </div>
       
 
@@ -59,12 +96,14 @@ function App() {
       ? `❌ ${app.status}` 
       : `✅ ${app.status}`}
 </p>
-<p>{app.applied_date}</p>
+<p>
+  {new Date(app.applied_date).toLocaleDateString('en-US')}
+</p>
           <p>{app.company}</p>
           <p>{app.role}</p>
           <p>${app.salary}</p>
           <p>{app.location}</p>
-          <button onClick={() => deleteJob(app)} className="deleteButton">🗑️</button>
+          <button onClick={() => deleteApplication(app.id)} className="deleteButton">🗑️</button>
          
         </div>
       ))}

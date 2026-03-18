@@ -4,13 +4,17 @@ const pool = require("../db");
 
 // GET all (with optional filter)
 router.get("/", async (req, res) => {
-  const { status } = req.query;
+  const { search } = req.query;
 
-  if (status) {
+  if (search) {
     const result = await pool.query(
-      "SELECT * FROM applications WHERE status = $1 ORDER BY id DESC",
-      [status]
-    );
+        `SELECT * FROM applications
+         WHERE company ILIKE $1
+            OR role ILIKE $1
+            OR status ILIKE $1
+         ORDER BY id DESC`,
+        [`%${search}%`]
+      );
     return res.json(result.rows);
   }
 
@@ -22,14 +26,14 @@ router.get("/", async (req, res) => {
 
 // POST
 router.post("/", async (req, res) => {
-  const { company, role, status, notes } = req.body;
+  const { company, role, status, location, salary } = req.body;
 
   const result = await pool.query(
-    "INSERT INTO applications (company, role, status, notes) VALUES ($1, $2, $3, $4) RETURNING *",
-    [company, role, status, notes]
+    "INSERT INTO applications (company, role, status, location, salary) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [company, role, status, location, salary]
   );
 
-  res.json(result.rows[0]);
+  res.json(result.rows);
 });
 
 // PUT

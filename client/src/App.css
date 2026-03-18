@@ -80,6 +80,34 @@ margin-left: 10px;
 background-color: transparent;
 border: transparent;
 align-self: flex-end;
+  }
 
+  .modal {
+  background: rgba(238, 228, 228, 0.65);
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 300px;
+  position: relative;
+  }
 
+  .addForm{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  h2, label{
+    color: black;
+  }
+
+  .formInput {
+    background-color: rgba(255, 249, 249, 0.65);
+    color: black;
   }

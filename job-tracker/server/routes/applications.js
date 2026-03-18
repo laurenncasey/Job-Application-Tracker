@@ -39,11 +39,11 @@ router.post("/", async (req, res) => {
 // PUT
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const { company, role, status, applied_date, location, salary} = req.body;
 
   await pool.query(
-    "UPDATE applications SET status = $1 WHERE id = $2",
-    [status, id]
+    "UPDATE applications SET status = $3, applied_date = $4, location = $5, role = $2, company = $1, salary = $6 WHERE id = $7",
+    [company, role, status, applied_date, location, salary, id]
   );
 
   res.sendStatus(200);

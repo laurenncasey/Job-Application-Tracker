@@ -30,7 +30,7 @@ A web application to track your job applications, built with React, TypeScript, 
 
 Clone the repository:
 
-`git clone [https://github.com/laurenncasey/job-application-tracker.git](https://github.com/laurenncasey/Job-Application-Tracker.git)`
+`git clone https://github.com/laurenncasey/Job-Application-Tracker.git`
 `cd job-application-tracker`
 
 Install dependencies:
@@ -59,4 +59,4 @@ Run the frontend:
 
 `cd job-tracker/server/ && node index.js`
 
-The app should now be running at [http://localhost:3000](http://localhost:5173/). 
+The app should now be running at http://localhost:5173/. 
